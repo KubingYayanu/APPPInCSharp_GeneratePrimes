@@ -3,3 +3,4 @@ GeneratePrimes.Console/bin/
 GeneratePrimes.Console/obj/
 GeneratePrimes.UnitTests/obj/
 packages/
+GeneratePrimes.UnitTests/bin/

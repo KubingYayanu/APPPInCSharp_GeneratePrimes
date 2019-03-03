@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratePrimes.Console", "GeneratePrimes.Console\GeneratePrimes.Console.csproj", "{A3747F20-6BE1-4DE3-B221-A87770287F28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratePrimes.UnitTests", "GeneratePrimes.UnitTests\GeneratePrimes.UnitTests.csproj", "{7E93A58F-B2A3-4671-9225-4E9D78EE7B7E}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3747F20-6BE1-4DE3-B221-A87770287F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3747F20-6BE1-4DE3-B221-A87770287F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3747F20-6BE1-4DE3-B221-A87770287F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3747F20-6BE1-4DE3-B221-A87770287F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E93A58F-B2A3-4671-9225-4E9D78EE7B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E93A58F-B2A3-4671-9225-4E9D78EE7B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E93A58F-B2A3-4671-9225-4E9D78EE7B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E93A58F-B2A3-4671-9225-4E9D78EE7B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
