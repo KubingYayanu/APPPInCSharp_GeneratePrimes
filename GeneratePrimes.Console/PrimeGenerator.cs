@@ -4,7 +4,6 @@ namespace GeneratePrimes.Console
 {
     public class PrimeGenerator
     {
-        private static int s;
         private static bool[] f;
         private static int[] primes;
 
@@ -16,19 +15,19 @@ namespace GeneratePrimes.Console
             }
             else
             {
-                InitializeSieve(maxValue);
-                Sieve();
-                LoadPrimes();
+                InitializeArrayOfIntegers(maxValue);
+                CrossOutMultiples();
+                PutUncrossedIntegersIntoResult();
                 return primes;
             }
         }
 
-        private static void LoadPrimes()
+        private static void PutUncrossedIntegersIntoResult()
         {
             int i;
             int j;
             int count = 0;
-            for (i = 0; i < s; i++)
+            for (i = 0; i < f.Length; i++)
             {
                 if (f[i])
                 {
@@ -38,7 +37,7 @@ namespace GeneratePrimes.Console
 
             primes = new int[count];
 
-            for (i = 0, j = 0; i < s; i++)
+            for (i = 0, j = 0; i < f.Length; i++)
             {
                 if (f[i])
                 {
@@ -47,15 +46,15 @@ namespace GeneratePrimes.Console
             }
         }
 
-        private static void Sieve()
+        private static void CrossOutMultiples()
         {
             int i;
             int j;
-            for (i = 2; i < Math.Sqrt(s) + 1; i++)
+            for (i = 2; i < Math.Sqrt(f.Length) + 1; i++)
             {
                 if (f[i])
                 {
-                    for (j = 2 * i; j < s; j += i)
+                    for (j = 2 * i; j < f.Length; j += i)
                     {
                         f[j] = false;
                     }
@@ -63,13 +62,12 @@ namespace GeneratePrimes.Console
             }
         }
 
-        private static void InitializeSieve(int maxValue)
+        private static void InitializeArrayOfIntegers(int maxValue)
         {
-            s = maxValue + 1;
-            f = new bool[s];
+            f = new bool[maxValue + 1];
             int i;
 
-            for (i = 0; i < s; i++)
+            for (i = 0; i < f.Length; i++)
             {
                 f[i] = true;
             }
