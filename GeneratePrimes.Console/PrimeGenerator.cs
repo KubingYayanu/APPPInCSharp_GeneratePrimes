@@ -4,8 +4,8 @@ namespace GeneratePrimes.Console
 {
     public class PrimeGenerator
     {
-        private static bool[] f;
-        private static int[] primes;
+        private static bool[] isCrossed;
+        private static int[] result;
 
         public static int[] GeneratePrimeNumbers(int maxValue)
         {
@@ -18,8 +18,41 @@ namespace GeneratePrimes.Console
                 InitializeArrayOfIntegers(maxValue);
                 CrossOutMultiples();
                 PutUncrossedIntegersIntoResult();
-                return primes;
+                return result;
             }
+        }
+
+        private static void InitializeArrayOfIntegers(int maxValue)
+        {
+            isCrossed = new bool[maxValue + 1];
+            for (int i = 2; i < isCrossed.Length; i++)
+            {
+                isCrossed[i] = false;
+            }
+        }
+
+        private static void CrossOutMultiples()
+        {
+            for (int i = 2; i < Math.Sqrt(isCrossed.Length) + 1; i++)
+            {
+                if (NotCrossed(i))
+                {
+                    CrossOutputMultiplesOf(i);
+                }
+            }
+        }
+
+        private static void CrossOutputMultiplesOf(int i)
+        {
+            for (int multiple = 2 * i; multiple < isCrossed.Length; multiple += i)
+            {
+                isCrossed[multiple] = true;
+            }
+        }
+
+        private static bool NotCrossed(int i)
+        {
+            return isCrossed[i] == false;
         }
 
         private static void PutUncrossedIntegersIntoResult()
@@ -27,52 +60,23 @@ namespace GeneratePrimes.Console
             int i;
             int j;
             int count = 0;
-            for (i = 0; i < f.Length; i++)
+            for (i = 2; i < isCrossed.Length; i++)
             {
-                if (f[i])
+                if (NotCrossed(i))
                 {
                     count++;
                 }
             }
 
-            primes = new int[count];
+            result = new int[count];
 
-            for (i = 0, j = 0; i < f.Length; i++)
+            for (i = 2, j = 0; i < isCrossed.Length; i++)
             {
-                if (f[i])
+                if (NotCrossed(i))
                 {
-                    primes[j++] = i;
+                    result[j++] = i;
                 }
             }
-        }
-
-        private static void CrossOutMultiples()
-        {
-            int i;
-            int j;
-            for (i = 2; i < Math.Sqrt(f.Length) + 1; i++)
-            {
-                if (f[i])
-                {
-                    for (j = 2 * i; j < f.Length; j += i)
-                    {
-                        f[j] = false;
-                    }
-                }
-            }
-        }
-
-        private static void InitializeArrayOfIntegers(int maxValue)
-        {
-            f = new bool[maxValue + 1];
-            int i;
-
-            for (i = 0; i < f.Length; i++)
-            {
-                f[i] = true;
-            }
-
-            f[0] = f[1] = false;
         }
     }
 }
