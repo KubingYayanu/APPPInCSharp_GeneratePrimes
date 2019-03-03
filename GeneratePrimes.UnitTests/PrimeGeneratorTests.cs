@@ -37,5 +37,30 @@ namespace GeneratePrimes.UnitTests
             Assert.That(centArray.Length, Is.EqualTo(25));
             Assert.That(centArray[24], Is.EqualTo(97));
         }
+
+        [Test]
+        public void GeneratePrimeNumbers_ExhaustiveTestThePrimeList_AllIntegersInTheListIsPrime()
+        {
+            for (int i = 2; i < 500; i++)
+            {
+                VerifyPrimeList(PrimeGenerator.GeneratePrimeNumbers(i));
+            }
+        }
+
+        private void VerifyPrimeList(int[] list)
+        {
+            for (int i = 0; i < list.Length; i++)
+            {
+                VerifyPrime(list[i]);
+            }
+        }
+
+        private void VerifyPrime(int n)
+        {
+            for (int factor = 2; factor < n; factor++)
+            {
+                Assert.That(n % factor, Is.Not.EqualTo(0));
+            }
+        }
     }
 }
