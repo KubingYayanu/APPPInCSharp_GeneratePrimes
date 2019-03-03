@@ -64,6 +64,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeneratePrimes.Console\GeneratePrimes.Console.csproj">
+      <Project>{A3747F20-6BE1-4DE3-B221-A87770287F28}</Project>
+      <Name>GeneratePrimes.Console</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
