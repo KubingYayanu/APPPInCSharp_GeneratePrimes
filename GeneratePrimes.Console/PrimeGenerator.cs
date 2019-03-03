@@ -4,7 +4,7 @@ namespace GeneratePrimes.Console
 {
     public class PrimeGenerator
     {
-        private static bool[] isCrossed;
+        private static bool[] crossedOut;
         private static int[] result;
 
         public static int[] GeneratePrimeNumbers(int maxValue)
@@ -15,26 +15,26 @@ namespace GeneratePrimes.Console
             }
             else
             {
-                InitializeArrayOfIntegers(maxValue);
+                UncrossIntegerUpto(maxValue);
                 CrossOutMultiples();
                 PutUncrossedIntegersIntoResult();
                 return result;
             }
         }
 
-        private static void InitializeArrayOfIntegers(int maxValue)
+        private static void UncrossIntegerUpto(int maxValue)
         {
-            isCrossed = new bool[maxValue + 1];
-            for (int i = 2; i < isCrossed.Length; i++)
+            crossedOut = new bool[maxValue + 1];
+            for (int i = 2; i < crossedOut.Length; i++)
             {
-                isCrossed[i] = false;
+                crossedOut[i] = false;
             }
         }
 
         private static void CrossOutMultiples()
         {
-            int maxPrimeFactor = CalcMaxPrimeFactor();
-            for (int i = 2; i < maxPrimeFactor + 1; i++)
+            int limit = DetermineIterationLimit();
+            for (int i = 2; i <= limit; i++)
             {
                 if (NotCrossed(i))
                 {
@@ -43,29 +43,24 @@ namespace GeneratePrimes.Console
             }
         }
 
-        private static int CalcMaxPrimeFactor()
+        private static int DetermineIterationLimit()
         {
-            double maxPrimeFactor = Math.Sqrt(isCrossed.Length) + 1;
-            return (int)maxPrimeFactor;
+            double iterationLimit = Math.Sqrt(crossedOut.Length);
+            return (int)iterationLimit;
         }
 
         private static void CrossOutputMultiplesOf(int i)
         {
-            for (int multiple = 2 * i; multiple < isCrossed.Length; multiple += i)
+            for (int multiple = 2 * i; multiple < crossedOut.Length; multiple += i)
             {
-                isCrossed[multiple] = true;
+                crossedOut[multiple] = true;
             }
-        }
-
-        private static bool NotCrossed(int i)
-        {
-            return isCrossed[i] == false;
         }
 
         private static void PutUncrossedIntegersIntoResult()
         {
             result = new int[NumberOfUncrossedIntegers()];
-            for (int i = 2, j = 0; i < isCrossed.Length; i++)
+            for (int i = 2, j = 0; i < crossedOut.Length; i++)
             {
                 if (NotCrossed(i))
                 {
@@ -77,15 +72,19 @@ namespace GeneratePrimes.Console
         private static int NumberOfUncrossedIntegers()
         {
             int count = 0;
-            for (int i = 2; i < isCrossed.Length; i++)
+            for (int i = 2; i < crossedOut.Length; i++)
             {
                 if (NotCrossed(i))
                 {
                     count++;
                 }
             }
-
             return count;
+        }
+
+        private static bool NotCrossed(int i)
+        {
+            return crossedOut[i] == false;
         }
     }
 }
