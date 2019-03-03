@@ -33,13 +33,20 @@ namespace GeneratePrimes.Console
 
         private static void CrossOutMultiples()
         {
-            for (int i = 2; i < Math.Sqrt(isCrossed.Length) + 1; i++)
+            int maxPrimeFactor = CalcMaxPrimeFactor();
+            for (int i = 2; i < maxPrimeFactor + 1; i++)
             {
                 if (NotCrossed(i))
                 {
                     CrossOutputMultiplesOf(i);
                 }
             }
+        }
+
+        private static int CalcMaxPrimeFactor()
+        {
+            double maxPrimeFactor = Math.Sqrt(isCrossed.Length) + 1;
+            return (int)maxPrimeFactor;
         }
 
         private static void CrossOutputMultiplesOf(int i)
@@ -57,10 +64,20 @@ namespace GeneratePrimes.Console
 
         private static void PutUncrossedIntegersIntoResult()
         {
-            int i;
-            int j;
+            result = new int[NumberOfUncrossedIntegers()];
+            for (int i = 2, j = 0; i < isCrossed.Length; i++)
+            {
+                if (NotCrossed(i))
+                {
+                    result[j++] = i;
+                }
+            }
+        }
+
+        private static int NumberOfUncrossedIntegers()
+        {
             int count = 0;
-            for (i = 2; i < isCrossed.Length; i++)
+            for (int i = 2; i < isCrossed.Length; i++)
             {
                 if (NotCrossed(i))
                 {
@@ -68,15 +85,7 @@ namespace GeneratePrimes.Console
                 }
             }
 
-            result = new int[count];
-
-            for (i = 2, j = 0; i < isCrossed.Length; i++)
-            {
-                if (NotCrossed(i))
-                {
-                    result[j++] = i;
-                }
-            }
+            return count;
         }
     }
 }
